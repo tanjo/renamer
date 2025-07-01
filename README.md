@@ -46,6 +46,17 @@ Options:
   -h, --help           display help for command
 ```
 
+## config.json
+
+```json
+{
+  "pattern": "oldPattern",
+  "replacement": "newPattern",
+  "debug": false,
+  "recursive": false
+}
+```
+
 ## 実行結果
 
 <pre>
