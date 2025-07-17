@@ -34,16 +34,18 @@ renamer [options] <directory> [pattern] [replacement]
 
 ```sh
 Arguments:
-  directory            対象のディレクトリパス
-  pattern              置換するパターン（正規表現）
-  replacement          置換後の文字列
+  directory                対象のディレクトリパス
+  pattern                  置換するパターン（正規表現）
+  replacement              置換後の文字列
 
 Options:
-  -V, --version        output the version number
-  -c, --config <path>  設定ファイルのパス
-  -d, --debug          デバッグモード（実際のリネームは行わない）
-  -r, --recursive      サブディレクトリも再帰的に処理する
-  -h, --help           display help for command
+  -V, --version            output the version number
+  -c, --config <path>      設定ファイルのパス
+  -d, --debug              デバッグモード（実際のリネームは行わない）
+  -r, --recursive          サブディレクトリも再帰的に処理する
+  -k, --kansuji-to-arabic  漢数字をアラビア数字に変換する
+  -K, --keep-kansuji       漢数字を残す
+  -h, --help               display help for command
 ```
 
 ## config.json
@@ -53,7 +55,9 @@ Options:
   "pattern": "oldPattern",
   "replacement": "newPattern",
   "debug": false,
-  "recursive": false
+  "recursive": false,
+  "kansujiToArabic": false,
+  "keepKansuji": false
 }
 ```
 
@@ -80,3 +84,9 @@ Options:
   <span style="color:skyblue">リネーム対象:</span> テスト2.txt -> テス猫2.txt
 <span style="color:skyblue">リネーム対象:</span> テスト.txt -> テス猫.txt
 </pre>
+
+## CHANGELOG
+
+### 2025.7.17
+- 新機能: 漢数字をアラビア数字に変換するオプションを追加
+- 新機能: 漢数字を残すオプションを追加
