@@ -18,7 +18,7 @@ program
   .description("特定のディレクトリにあるファイル名の一部をすべて置換するスクリプト")
   .argument("<directory>", "対象のディレクトリパス")
   .argument("[pattern]", "置換するパターン（正規表現）")
-  .argument("[replacement]", "置換後の文字列")
+  .argument("[replacement]", "置換後の文字列（正規表現でマッチしたものを利用する場合は \$1、\$2 のように記載）")
   .option("-c, --config <path>", "設定ファイルのパス")
   .option("-d, --debug", "デバッグモード（実際のリネームは行わない）")
   .option("-r, --recursive", "サブディレクトリも再帰的に処理する")
