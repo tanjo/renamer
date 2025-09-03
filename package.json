@@ -1,6 +1,6 @@
 {
   "name": "renamer",
-  "version": " 2025.8.12",
+  "version": "2025.8.12",
   "description": "特定のディレクトリにあるファイル名の一部をすべて置換するスクリプトです。",
   "main": "index.js",
   "bin": {
