@@ -24,6 +24,7 @@ program
   .option("-r, --recursive", "サブディレクトリも再帰的に処理する")
   .option("-k, --kansuji-to-arabic", "漢数字をアラビア数字に変換する")
   .option("-K, --keep-kansuji", "漢数字を残す")
+  .option('-l, --length <number>', 'ファイルの文字数を確認する')
   .action((directory, pattern, replacement, options) => {
     const configPath = options.config;
     if (configPath) {
@@ -39,6 +40,7 @@ program
         options.recursive = config.recursive || options.recursive;
         options.kansujiToArabic = config.kansujiToArabic || options.kansujiToArabic;
         options.keepKansuji = config.keepKansuji || options.keepKansuji;
+        options.length = config.length || options.length;
       } catch (err) {
         console.error(pico.redBright(`設定ファイルの読み込みに失敗しました: ${err.message}`));
         process.exit(1);
@@ -50,12 +52,12 @@ program
       console.error(pico.redBright(`指定されたディレクトリが存在しません: ${targetDir}`));
       process.exit(1);
     }
-    if (!options.kansujiToArabic && (!pattern || pattern === "")) {
+    if (!options.kansujiToArabic && (!pattern || pattern === "") && (options.length === undefined)) {
       console.error(pico.redBright("置換パターンが指定されていません。正規表現を使用してください。"));
       process.exit(1);
     }
     const targetPattern = new RegExp(pattern); // デフォルトは空の正規表現
-    if (!options.kansujiToArabic && !targetPattern) {
+    if (!options.kansujiToArabic && !targetPattern && (options.length === undefined)) {
       console.error(pico.redBright("置換パターンが正しく指定されていません。正規表現を使用してください。"));
       process.exit(1);
     }
@@ -64,6 +66,7 @@ program
     const targetReplacement = replacement || "";
     const isDebug = options.debug;
     const recursive = options.recursive;
+    const length = options.length;
 
     const renamerController = new RenamerController();
     renamerController.run({
@@ -73,7 +76,8 @@ program
       replacement: targetReplacement,
       recursive,
       kansujiToArabic,
-      keepKansuji
+      keepKansuji,
+      length
     });
   });
 program.parse();
