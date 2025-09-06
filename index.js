@@ -25,6 +25,7 @@ program
   .option("-k, --kansuji-to-arabic", "漢数字をアラビア数字に変換する")
   .option("-K, --keep-kansuji", "漢数字を残す")
   .option('-l, --length <number>', 'ファイルの文字数を確認する')
+  .option("-L, --length-diff", "変更前・変更後のファイル名の長さを表示する")
   .action((directory, pattern, replacement, options) => {
     const configPath = options.config;
     if (configPath) {
@@ -41,6 +42,7 @@ program
         options.kansujiToArabic = config.kansujiToArabic || options.kansujiToArabic;
         options.keepKansuji = config.keepKansuji || options.keepKansuji;
         options.length = config.length || options.length;
+        options.lengthDiff = config.lengthDiff || options.lengthDiff;
       } catch (err) {
         console.error(pico.redBright(`設定ファイルの読み込みに失敗しました: ${err.message}`));
         process.exit(1);
@@ -67,6 +69,7 @@ program
     const isDebug = options.debug;
     const recursive = options.recursive;
     const length = options.length;
+    const lengthDiff = options.lengthDiff;
 
     const renamerController = new RenamerController();
     renamerController.run({
@@ -77,7 +80,8 @@ program
       recursive,
       kansujiToArabic,
       keepKansuji,
-      length
+      length,
+      lengthDiff
     });
   });
 program.parse();
