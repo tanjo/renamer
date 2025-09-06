@@ -64,28 +64,72 @@ Options:
 ## 実行結果
 
 <pre>
-<span style="color:green">></span> renamer ほげ (テス)ト \$1猫 -r
-<span style="color:skyblue">対象ディレクトリ:</span> /Users/tanjo/project/tanjo/renamer/ほげ <span style="color:skyblue">置換パターン:</span> /(テス)ト/ <span style="color:skyblue">置換後の文字列:</span> $1猫 <span style="color:yellow">デバッグモード:</span> 有効 <span style="color:yellow">再帰処理:</span> 有効
-<span style="color:magenta">ディレクトリ内のファイル数:</span> 1 <span style="color:yellow">ディレクトリ内のサブディレクトリ数:</span> 1
-  <span style="color:skyblue">対象ディレクトリ:</span> /Users/tanjo/project/tanjo/renamer/ほげ/ふが   <span style="color:skyblue">置換パターン:</span> /(テス)ト/   <span style="color:skyblue">置換後の文字列:</span> $1猫   <span style="color:yellow">デバッグモード:</span> 有効   <span style="color:yellow">再帰処理:</span> 有効
-  <span style="color:magenta">ディレクトリ内のファイル数:</span> 1   <span style="color:yellow">ディレクトリ内のサブディレクトリ数:</span> 0
-  <span style="color:green">リネーム成功:</span> テスト2.txt -> テス猫2.txt
-<span style="color:green">リネーム成功:</span> テスト.txt -> テス猫.txt
+> renamer -d '/Users/tanjo/project/tanjoin/DISK' 'ふが' 'んひぃ' -r
++ <span style="color:skyblue">対象ディレクトリ:</span> /Users/tanjo/project/tanjoin/DISK 
+| <span style="color:skyblue">置換パターン:</span> /ふが/ 
+| <span style="color:skyblue">置換後の文字列:</span> んひぃ 
+| <span style="color:yellow">デバッグモード:</span> 有効 
+| <span style="color:yellow">再帰処理:</span> 有効 
+| <span style="color:yellow">漢数字をアラビア数字に変換:</span> 無効 
+| <span style="color:yellow">漢数字を残す:</span> 無効 
+| <span style="color:yellow">ファイルの文字数を確認:</span> 無効
+| <span style="color:magenta">ディレクトリ内のファイル数:</span> 0 
+| <span style="color:green">ディレクトリ内のサブディレクトリ数:</span> 1 
++-+
+  + <span style="color:skyblue">対象ディレクトリ:</span> /Users/tanjo/project/tanjoin/DISK/SUB  
+  | <span style="color:skyblue">置換パターン:</span> /ふが/ 
+  | <span style="color:skyblue">置換後の文字列:</span> んひぃ 
+  | <span style="color:yellow">デバッグモード:</span> 有効 
+  | <span style="color:yellow">再帰処理:</span> 有効 
+  | <span style="color:yellow">漢数字をアラビア数字に変換:</span> 無効 
+  | <span style="color:yellow">漢数字を残す:</span> 無効 
+  | <span style="color:yellow">ファイルの文字数を確認:</span> 無効
+  | <span style="color:magenta">ディレクトリ内のファイル数:</span> 1 
+  | <span style="color:green">ディレクトリ内のサブディレクトリ数:</span> 0 
+  +-+
+    <span style="color:green">リネーム成功:</span> ほげ<span style="color:white;background-color:red">ふが</span>ぴよ.mp4 
+               <span style="color:green">-></span> ほげ<span style="color:green">んひぃ</span>ぴよ.mp4
 </pre>
 
 ### デバッグモード
 
 <pre>
-<span style="color:green">></span> renamer ほげ (テス)ト \$1猫 -r -d
-<span style="color:skyblue">対象ディレクトリ:</span> /Users/tanjo/project/tanjo/renamer/ほげ <span style="color:skyblue">置換パターン:</span> /(テス)ト/ <span style="color:skyblue">置換後の文字列:</span> $1猫 <span style="color:yellow">デバッグモード:</span> 有効 <span style="color:yellow">再帰処理:</span> 有効
-<span style="color:magenta">ディレクトリ内のファイル数:</span> 1 <span style="color:yellow">ディレクトリ内のサブディレクトリ数:</span> 1
-  <span style="color:skyblue">対象ディレクトリ:</span> /Users/tanjo/project/tanjo/renamer/ほげ/ふが   <span style="color:skyblue">置換パターン:</span> /(テス)ト/   <span style="color:skyblue">置換後の文字列:</span> $1猫   <span style="color:yellow">デバッグモード:</span> 有効   <span style="color:yellow">再帰処理:</span> 有効
-  <span style="color:magenta">ディレクトリ内のファイル数:</span> 1   <span style="color:yellow">ディレクトリ内のサブディレクトリ数:</span> 0
-  <span style="color:skyblue">リネーム対象:</span> テスト2.txt -> テス猫2.txt
-<span style="color:skyblue">リネーム対象:</span> テスト.txt -> テス猫.txt
+> renamer -d '/Users/tanjo/project/tanjoin/DISK' 'ふが' 'んひぃ' -r
++ <span style="color:skyblue">対象ディレクトリ:</span> /Users/tanjo/project/tanjoin/DISK 
+| <span style="color:skyblue">置換パターン:</span> /ふが/ 
+| <span style="color:skyblue">置換後の文字列:</span> んひぃ 
+| <span style="color:yellow">デバッグモード:</span> 有効 
+| <span style="color:yellow">再帰処理:</span> 有効 
+| <span style="color:yellow">漢数字をアラビア数字に変換:</span> 無効 
+| <span style="color:yellow">漢数字を残す:</span> 無効 
+| <span style="color:yellow">ファイルの文字数を確認:</span> 無効
+| <span style="color:magenta">ディレクトリ内のファイル数:</span> 0 
+| <span style="color:green">ディレクトリ内のサブディレクトリ数:</span> 1 
++-+
+  + <span style="color:skyblue">対象ディレクトリ:</span> /Users/tanjo/project/tanjoin/DISK/SUB  
+  | <span style="color:skyblue">置換パターン:</span> /ふが/ 
+  | <span style="color:skyblue">置換後の文字列:</span> んひぃ 
+  | <span style="color:yellow">デバッグモード:</span> 有効 
+  | <span style="color:yellow">再帰処理:</span> 有効 
+  | <span style="color:yellow">漢数字をアラビア数字に変換:</span> 無効 
+  | <span style="color:yellow">漢数字を残す:</span> 無効 
+  | <span style="color:yellow">ファイルの文字数を確認:</span> 無効
+  | <span style="color:magenta">ディレクトリ内のファイル数:</span> 1 
+  | <span style="color:green">ディレクトリ内のサブディレクトリ数:</span> 0 
+  +-+
+    <span style="color:skyblue">リネーム対象:</span> ほげ<span style="color:white;background-color:red">ふが</span>ぴよ.mp4 
+               <span style="color:skyblue">-></span> ほげ<span style="color:green">んひぃ</span>ぴよ.mp4
 </pre>
 
 ## CHANGELOG
+
+### 2025.9.6
+- 修正: 変更点のハイライト表示で、削除部分が赤色で表示されるように修正
+- 修正: 変更点のハイライト表示で、追加部分が緑色で表示されるように修正
+- 修正: 横に長かった表示を見やすく修正
+
+### 2025.9.5
+- 新機能: 文字列の長さを確認するオプションを追加
 
 ### 2025.7.17
 - 新機能: 漢数字をアラビア数字に変換するオプションを追加

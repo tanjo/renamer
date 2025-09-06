@@ -1,6 +1,6 @@
 {
   "name": "renamer",
-  "version": "2025.9.5",
+  "version": "2025.9.6",
   "description": "特定のディレクトリにあるファイル名の一部をすべて置換するスクリプトです。",
   "main": "index.js",
   "bin": {
@@ -13,6 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "commander": "^14.0.0",
+    "diff": "^8.0.2",
     "picocolors": "^1.1.1"
   }
 }
