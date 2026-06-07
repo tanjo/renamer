@@ -22,10 +22,11 @@ program
   .option("-c, --config <path>", "設定ファイルのパス")
   .option("-d, --debug", "デバッグモード（実際のリネームは行わない）")
   .option("-r, --recursive", "サブディレクトリも再帰的に処理する")
-  .option("-k, --kansuji-to-arabic", "漢数字をアラビア数字に変換する")
-  .option("-K, --keep-kansuji", "漢数字を残す")
-  .option('-l, --length <number>', 'ファイルの文字数を確認する')
-  .option("-L, --length-diff", "変更前・変更後のファイル名の長さを表示する")
+  .option("-a, --kansuji-to-arabic", "漢数字をアラビア数字に変換する")
+  .option("-x, --affix-kansuji-to-arabic", "「第XXX話」の形式の漢数字をアラビア数字に変換する")
+  .option("-k, --keep-kansuji", "漢数字を残す")
+  .option('-l, --length <number>', 'ファイルの文字数を確認する. 指定した文字数より長いファイル名のみを対象とする', parseInt)
+  .option("-s, --length-diff", "変更前・変更後のファイル名の長さを表示する")
   .action((directory, pattern, replacement, options) => {
     const configPath = options.config;
     if (configPath) {
@@ -40,6 +41,7 @@ program
         options.debug = config.debug || options.debug;
         options.recursive = config.recursive || options.recursive;
         options.kansujiToArabic = config.kansujiToArabic || options.kansujiToArabic;
+        options.affixKansujiToArabic = config.affixKansujiToArabic || options.affixKansujiToArabic;
         options.keepKansuji = config.keepKansuji || options.keepKansuji;
         options.length = config.length || options.length;
         options.lengthDiff = config.lengthDiff || options.lengthDiff;
@@ -64,6 +66,7 @@ program
       process.exit(1);
     }
     const kansujiToArabic = options.kansujiToArabic;
+    const affixKansujiToArabic = options.affixKansujiToArabic;
     const keepKansuji = options.keepKansuji;
     const targetReplacement = replacement || "";
     const isDebug = options.debug;
@@ -79,6 +82,7 @@ program
       replacement: targetReplacement,
       recursive,
       kansujiToArabic,
+      affixKansujiToArabic,
       keepKansuji,
       length,
       lengthDiff
