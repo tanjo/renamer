@@ -56,12 +56,12 @@ program
       console.error(pico.redBright(`指定されたディレクトリが存在しません: ${targetDir}`));
       process.exit(1);
     }
-    if (!options.kansujiToArabic && (!pattern || pattern === "") && (options.length === undefined)) {
+    if ((!options.kansujiToArabic && !options.affixKansujiToArabic) && (!pattern || pattern === "") && (options.length === undefined)) {
       console.error(pico.redBright("置換パターンが指定されていません。正規表現を使用してください。"));
       process.exit(1);
     }
     const targetPattern = new RegExp(pattern); // デフォルトは空の正規表現
-    if (!options.kansujiToArabic && !targetPattern && (options.length === undefined)) {
+    if ((!options.kansujiToArabic && !options.affixKansujiToArabic) && !targetPattern && (options.length === undefined)) {
       console.error(pico.redBright("置換パターンが正しく指定されていません。正規表現を使用してください。"));
       process.exit(1);
     }
