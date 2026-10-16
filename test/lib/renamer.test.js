@@ -5,6 +5,7 @@ const path = require("node:path");
 const test = require("node:test");
 
 const RenamerController = require("../../lib/renamer");
+const RenamerModel = require("../../lib/model/renamer_model");
 
 function createDirectory(t) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "renamer-test-"));
@@ -34,12 +35,9 @@ test("再帰モードではサブディレクトリも処理し、隠しファ�
   fs.writeFileSync(path.join(nestedDirectory, "ほげふが.txt"), "nested");
 
   runWithoutConsoleOutput(() => {
-    new RenamerController().run({
-      directory,
-      pattern: /ふが/,
-      replacement: "んひぃ",
-      recursive: true,
-    });
+    new RenamerController().run(
+      new RenamerModel(directory, /ふが/, "んひぃ", { recursive: true }).toRunOptions()
+    );
   });
 
   assert.equal(fs.readFileSync(path.join(directory, "んひぃ.txt"), "utf8"), "root", "直下のファイルが変更されていません");
@@ -57,12 +55,9 @@ test("デバッグモードでは対象を表示するだけでファイルを�
   fs.writeFileSync(originalPath, "content");
 
   runWithoutConsoleOutput(() => {
-    new RenamerController().run({
-      directory,
-      pattern: /old/,
-      replacement: "new",
-      isDebug: true,
-    });
+    new RenamerController().run(
+      new RenamerModel(directory, /old/, "new", { debug: true }).toRunOptions()
+    );
   });
 
   assert.equal(fs.readFileSync(originalPath, "utf8"), "content", "デバッグモードで元ファイルが変更されています");
@@ -75,11 +70,9 @@ test("変換先が既に存在する場合はファイルを上書きしない",
   fs.writeFileSync(path.join(directory, "new.txt"), "destination");
 
   runWithoutConsoleOutput(() => {
-    new RenamerController().run({
-      directory,
-      pattern: /old/,
-      replacement: "new",
-    });
+    new RenamerController().run(
+      new RenamerModel(directory, /old/, "new").toRunOptions()
+    );
   });
 
   assert.equal(fs.readFileSync(path.join(directory, "old.txt"), "utf8"), "source", "変換元ファイルが失われています");

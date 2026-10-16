@@ -5,6 +5,7 @@ const path = require("node:path");
 const test = require("node:test");
 
 const RecursiveDirectoryTraversalService = require("../../../lib/service/recursive_directory_traversal_service");
+const RenamerModel = require("../../../lib/model/renamer_model");
 
 function createDirectory(t) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "renamer-directory-test-"));
@@ -44,10 +45,9 @@ test("再帰設定に従ってファイルを列挙し、隠しファイルを�
   };
 
   runWithoutConsoleOutput(() => {
-    new RecursiveDirectoryTraversalService(displayService, singleFileRenameService).traverse({
-      directory,
-      recursive: true,
-    });
+    new RecursiveDirectoryTraversalService(displayService, singleFileRenameService).traverse(
+      new RenamerModel(directory, ".*", "", { recursive: true }).toRunOptions()
+    );
   });
 
   assert.deepEqual(
@@ -79,10 +79,9 @@ test("再帰設定が無効ならサブディレクトリに入らない", (t) =
   };
 
   runWithoutConsoleOutput(() => {
-    new RecursiveDirectoryTraversalService(undefined, singleFileRenameService).traverse({
-      directory,
-      recursive: false,
-    });
+    new RecursiveDirectoryTraversalService(undefined, singleFileRenameService).traverse(
+      new RenamerModel(directory, ".*", "", { recursive: false }).toRunOptions()
+    );
   });
 
   assert.deepEqual(visitedFiles, [], "再帰無効なのにサブディレクトリ内のファイルが処理されています");

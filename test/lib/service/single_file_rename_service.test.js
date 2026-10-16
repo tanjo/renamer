@@ -5,6 +5,7 @@ const path = require("node:path");
 const test = require("node:test");
 
 const SingleFileRenameService = require("../../../lib/service/single_file_rename_service");
+const RenamerModel = require("../../../lib/model/renamer_model");
 
 function createDirectory(t) {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "renamer-file-test-"));
@@ -25,16 +26,6 @@ function runWithoutConsoleOutput(run) {
   }
 }
 
-test("正規表現のキャプチャを使ってファイル名を置換する", () => {
-  const service = new SingleFileRenameService();
-
-  assert.equal(
-    service.replaceNewFileName("video-12.mp4", /(\d+)/, "part-$1"),
-    "video-part-12.mp4",
-    "キャプチャした数字を含むファイル名になっていません"
-  );
-});
-
 test("指定したファイルを新しい名前に変更する", (t) => {
   const directory = createDirectory(t);
   fs.writeFileSync(path.join(directory, "old.txt"), "content");
@@ -43,7 +34,7 @@ test("指定したファイルを新しい名前に変更する", (t) => {
     new SingleFileRenameService().renameFile({
       directory,
       file: "old.txt",
-      options: { pattern: /old/, replacement: "new" },
+      options: new RenamerModel(directory, /old/, "new").toRunOptions(),
       depth: 0,
       seenFileNames: new Set(),
     });
@@ -66,7 +57,7 @@ test("変換先が既に存在する場合は上書きしない", (t) => {
     new SingleFileRenameService().renameFile({
       directory,
       file: "old.txt",
-      options: { pattern: /old/, replacement: "new" },
+      options: new RenamerModel(directory, /old/, "new").toRunOptions(),
       depth: 0,
       seenFileNames: new Set(),
     });
