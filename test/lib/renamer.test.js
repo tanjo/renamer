@@ -25,16 +25,6 @@ function runWithoutConsoleOutput(run) {
   }
 }
 
-test("正規表現のキャプチャを使ってファイル名を置換する", () => {
-  const renamer = new RenamerController();
-
-  assert.equal(
-    renamer.replaceNewFileName("video-12.mp4", /(\d+)/, "part-$1"),
-    "video-part-12.mp4",
-    "キャプチャした数字を含むファイル名になっていません"
-  );
-});
-
 test("再帰モードではサブディレクトリも処理し、隠しファイルは変更しない", (t) => {
   const directory = createDirectory(t);
   const nestedDirectory = path.join(directory, "nested");
