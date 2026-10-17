@@ -123,6 +123,9 @@ Options:
 
 ## CHANGELOG
 
+### 2026.10.18
+- `--affix-kansuji-to-arabic` だけだと動作しない場合がある問題を修正
+
 ### 2026.10.16
 - `--affix-kansuji-to-arabic` でも引数が不要になるように修正
 
